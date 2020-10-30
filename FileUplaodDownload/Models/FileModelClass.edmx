@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FileUploadDownloadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="employeelogin">
+          <Key>
+            <PropertyRef Name="empid" />
+          </Key>
+          <Property Name="empid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="varchar" MaxLength="50" />
+          <Property Name="pass" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UploadDownload">
+          <Key>
+            <PropertyRef Name="fileid" />
+          </Key>
+          <Property Name="fileid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ticketnumber" Type="int" />
+          <Property Name="filename" Type="varchar" MaxLength="50" />
+          <Property Name="filetype" Type="varchar" MaxLength="50" />
+          <Property Name="filedata" Type="varbinary(max)" />
+        </EntityType>
+        <EntityContainer Name="FileUploadDownloadModelStoreContainer">
+          <EntitySet Name="employeelogin" EntityType="Self.employeelogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UploadDownload" EntityType="Self.UploadDownload" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FileUploadDownloadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FileUploadDownloadEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="UploadDownloads" EntityType="FileUploadDownloadModel.UploadDownload" />
+          <EntitySet Name="employeelogins" EntityType="FileUploadDownloadModel.employeelogin" />
+        </EntityContainer>
+        <EntityType Name="UploadDownload">
+          <Key>
+            <PropertyRef Name="fileid" />
+          </Key>
+          <Property Name="fileid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ticketnumber" Type="Int32" />
+          <Property Name="filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="filetype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="filedata" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="employeelogin">
+          <Key>
+            <PropertyRef Name="empid" />
+          </Key>
+          <Property Name="empid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FileUploadDownloadModelStoreContainer" CdmEntityContainer="FileUploadDownloadEntities" >
+          <EntitySetMapping Name="UploadDownloads">
+            <EntityTypeMapping TypeName="FileUploadDownloadModel.UploadDownload">
+              <MappingFragment StoreEntitySet="UploadDownload">
+                <ScalarProperty Name="filedata" ColumnName="filedata" />
+                <ScalarProperty Name="filetype" ColumnName="filetype" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="ticketnumber" ColumnName="ticketnumber" />
+                <ScalarProperty Name="fileid" ColumnName="fileid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employeelogins">
+            <EntityTypeMapping TypeName="FileUploadDownloadModel.employeelogin">
+              <MappingFragment StoreEntitySet="employeelogin">
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="empid" ColumnName="empid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

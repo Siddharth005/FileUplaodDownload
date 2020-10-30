@@ -1,0 +1,97 @@
+﻿@model IEnumerable<FileUplaodDownload.Models.UploadDownload>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Ticketing System</h2>
+
+
+
+<p style="align-content ='right'">
+    <input type="button" value="New Ticket" onclick="window.location='@Url.Action("Create", "UploadDownloads")'" class="btn btn-primary" />
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Serial Number")
+        </th>
+        <th>
+            @Html.DisplayName("Ticket Number")
+        </th>
+        <th>
+            @Html.DisplayName("File Name")
+        </th>
+        <th>
+            @Html.DisplayName("File Type")
+        </th>
+        <th>
+            @Html.DisplayName("Download")
+        </th>
+        <th>
+            @Html.DisplayName("Delete")
+        </th>
+    </tr>
+
+    @foreach(var item in Model.Select((x, i) => new { Data = x, Index = i+1 }))
+        {
+            <tr>
+                <td>
+                    @item.Index
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.ticketnumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data.filename)
+                </td>
+                <td>
+                    @if (item.Data.filetype == "text/plain")
+                    {
+                        <img src="@Url.Content("~/icon/png/txt.png")" width="30" height="30" />
+                    }
+                    @if (item.Data.filetype == "application/pdf")
+                    {
+                        <img src="@Url.Content("~/icon/png/pdf.png")" width="30" height="30" />
+                    }
+                    @if (item.Data.filetype == "message/rfc822")
+                    {
+                        <img src="@Url.Content("~/icon/png/rtf.png")" width="30" height="30" />
+                    }
+                    @if (item.Data.filetype == "image/jpeg")
+                    {
+                        <img src="@Url.Content("~/icon/png/jpg.png")" width="30" height="30" />
+                    }
+                    @if (item.Data.filetype == "image/png")
+                    {
+                        <img src="@Url.Content("~/icon/png/png.png")" width="30" height="30" />
+                    }
+                    @if (item.Data.filetype == "application/msword")
+                    {
+                        <img src="@Url.Content("~/icon/png/doc.png")" width="30" height="30" />
+                    }
+                    @if (item.Data.filetype == "application/vnd.ms-excel")
+                    {
+                        <img src="@Url.Content("~/icon/png/xls.png")" width="30" height="30" />
+                    }
+                    @if (item.Data.filetype == "application/vnd.ms-powerpoint")
+                    {
+                        <img src="@Url.Content("~/icon/png/ppt.png")" width="30" height="30" />
+                    }
+                    @if (item.Data.filetype == "application/zip")
+                    {
+                        <img src="@Url.Content("~/icon/png/zip.png")" width="30" height="30" />
+                    }
+
+                </td>
+                <td>
+                    <input type="button" value="Download" onclick="window.location='@Url.Action("Download", "UploadDownloads", new { id = item.Data.fileid })'" class="btn" />
+
+                </td>
+                <td>
+                    <input type="button" value="Delete" onclick="window.location='@Url.Action("Delete", "UploadDownloads", new { id = item.Data.fileid })'" class="btn bg-danger" />
+                </td>
+            </tr>
+        }
+
+</table>

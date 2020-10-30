@@ -1,0 +1,76 @@
+﻿@model FileUplaodDownload.Models.UploadDownload
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UploadDownload</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.filename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.filename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticketnumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.filedata)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Download", "Download", new { id = Model.fileid }) |
+    @Html.ActionLink("Back to List", "Index")
+    <button id="btnShowModal" type="button"
+            class="btn btn-sm btn-default pull-left col-lg-11 button button4" onclick="ABC(Model.fileid)">
+        Preview
+    </button>
+</p>
+
+<div class="modal fade" tabindex="-1" id="PreviewModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    ×
+                </button>
+                <h4 class="modal-title">Preview</h4>
+            </div>
+            <div class="modal-body">
+                @Html.DisplayFor(model => model.filetype)
+            </div>
+            <div class="modal-footer">
+                @Html.ActionLink("Download", "Download", new { id = Model.fileid })
+
+            </div>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+            </script>
+            <script src="bootstrap/js/bootstrap.min.js"></script>
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                    $("#btnShowModal").click(ABC() {
+                        $("#PreviewModal").modal('show');
+                        var id = model.fileid; //if you want to pass an Id parameter
+                        window.location.href = '@Url.Action("Index", "UploadDownloads")';
+                        console.log(id)
+                    });
+
+                    $("#btnHideModal").click(function () {
+                        $("#loginModal").modal('hide');
+                    });
+                });
+            </script>
